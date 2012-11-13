@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+	<style>
+		video{
+			width:480px;
+			height:360px;
+		}
+	</style>
+</head>
+<body>
+  <video id="vid" autoplay="true"></video>
+  <script>
+		function gotStream(stream) {
+ 			video.src = webkitURL.createObjectURL(stream);
+		}
+		video = document.getElementById("vid");
+  	navigator.webkitGetUserMedia({video:true}, gotStream, function() {}); 
+  </script>  
+</body>
+</html>
+

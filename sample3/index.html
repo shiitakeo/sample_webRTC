@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Snap!!!!!</title>
+<style>
+	video{
+		border:1px solid silver;
+		width:480px;
+		height:360px;
+	}
+	canvas{
+		border:1px solid gold;
+		width:480px;
+		height:360px;     
+	}
+	button{
+		font: 18px sans-serif;
+		padding: 8px;
+	}
+	.graysclae{
+		-webkit-filter: graysclae(1);	
+	}
+	.sepia{
+		-webkit-filter: sepia(1);	
+	}
+	.invert{
+		-webkit-filter: invert(1);	
+	}
+	.blur{
+		-webkit-filter: blur(3px);	
+	}
+</style>
+</head>
+<body>
+	<center>
+		<video id="vid" autoplay="true"></video>
+		<canvas id="cvs"></canvas>
+		</br>
+			<button id="btn_filter" onclick="filter()">Change Filter</button>
+			<button id="btn" onclick="snap()">Snap!</button>
+		</center>
+	<script>
+		filters = ["", "sepia", "invert", "blur", "grayscale"];
+		findex = 0;
+
+		function gotStream(stream) {
+			video.src = webkitURL.createObjectURL(stream);
+		}
+		video = document.getElementById("vid");
+		canvas = document.getElementById("cvs");
+		canvas.width = 480;
+		canvas.height = 360;  
+		navigator.webkitGetUserMedia({video:true}, gotStream, function() {}); 
+
+function snap() {
+  canvas.className = '';
+  if (findex != 0)
+    canvas.classList.add(filters[findex]);
+  canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+}		
+function filter() {
+  video.className = '';
+  findex = (findex + 1) % filters.length;
+  if (findex != 0)
+    video.classList.add(filters[findex]);
+}
+</script>
+</body>
+</html>
+
